@@ -1,9 +1,9 @@
 import dataclasses
 from typing import List, Optional
 
-import httpx
+import httpx2
 import mediate
-from httpx._types import ProxiesTypes
+from httpx2._types import ProxyTypes
 
 from . import api, utils
 from .adaptor import InnerTubeAdaptor
@@ -50,7 +50,7 @@ class InnerTube(Client):
         referer: Optional[str] = None,
         locale: Optional[Locale] = None,
         auto: bool = True,
-        proxies: Optional[ProxiesTypes] = None,
+        proxies: Optional[ProxyTypes] = None,
     ) -> None:
         if client_name is None:
             raise ValueError("Precondition failed: Missing client name")
@@ -80,7 +80,7 @@ class InnerTube(Client):
         super().__init__(
             adaptor=InnerTubeAdaptor(
                 context=context,
-                session=httpx.Client(base_url=config.base_url, proxies=proxies),
+                session=httpx2.Client(base_url=config.base_url, proxy=proxies),
             )
         )
 

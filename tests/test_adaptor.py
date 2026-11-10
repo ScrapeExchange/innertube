@@ -1,5 +1,5 @@
 import flask
-import httpx
+import httpx2
 import innertube
 import pytest
 from innertube.config import config
@@ -56,7 +56,9 @@ def app() -> flask.Flask:
 def adaptor(app: flask.Flask) -> innertube.InnerTubeAdaptor:
     return innertube.InnerTubeAdaptor(
         context=innertube.ClientContext("FAKE_CLIENT", "1.0"),
-        session=httpx.Client(app=app, base_url="https://foo.bar/"),
+        session=httpx2.Client(
+            transport=httpx2.WSGITransport(app=app), base_url="https://foo.bar/"
+        ),
     )
 
 

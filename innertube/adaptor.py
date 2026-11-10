@@ -1,6 +1,6 @@
 from typing import Optional
 
-from httpx import Client, Request, Response
+from httpx2 import Client, Request, Response
 
 from . import api
 from .config import config
